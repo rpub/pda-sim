@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>PDA Simulator</title>
+    <meta name="viewport" content="width=device-width">    
+    <!-- <link href="https://fonts.googleapis.com/css?family=Lato:300|Oswald" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <script src="https://use.fontawesome.com/478e097f2b.js"></script>
+
+  </head>
+
+  <body>   
+    <div class="container">
+
+        <!-- ************************************************************** -->
+        <!-- EDITOR -->
+        <!-- ************************************************************** -->
+        <div class="editor">
+
+          <!-- heading -->
+          <div>
+            <h1>Pushdown Automata</h1>
+
+            <h2>A PDA, P is a 7-tuple:</h2>
+            <h2>(Q, ∑, Γ, δ, q0, Z, F)</h2>
+
+            <!-- <h5 id="Q">Q is the set of states</h5>
+            <h5 id="Q">∑ is the input alphabet</h5>
+            <h5 id="Q">Γ is the stack alphabet</h5>
+            <h5 id="Q">δ is the transition function</h5>
+            <h5 id="Q">q0 is the start state</h5>
+            <h5 id="Q">Z is the stack alphabet</h5>
+            <h5 id="Q">F is the set of accept states</h5> -->
+                        
+          </div>
+
+          <div id="regForm" action="">
+
+            <!--********************-->
+            <!-- 1. ADD STATES -->
+            <!--********************-->
+            <div class="tab" id="tab-1">
+              <h3 class="thick">Add Individual States: </h3>
+              <p id="desc-text">Q is the set of states; F is the set of those which are accepted by your language. Add each state individually below, and mark ✔️ if that state is an accept state.</p>
+
+              <!-- state input -->
+              <div class="input-wrapper">
+                <input class="input-keypress-handler" id="state-input-field" type="text" placeholder="Ex: q1">
+                <div class="input-buttons">
+                  <a href="#" class="add-state"><i class="fa fa-plus fa-2x"></i></a>
+                </div>
+              </div>
+
+              <!-- state list -->
+              <ul class="list" id="state-list">
+              </ul>
+
+              <!-- error wrapper -->          
+              <div class="row">
+                <div class="error" id="state-input-error">
+                  <a href="#"><i class="fa fa-times"></i></a>
+                  <p></p>
+                </div>
+              </div>
+
+            </div>
+            
+            <!--**********************-->
+            <!-- 2. SELECT START STATE-->
+            <!--**********************-->
+            <div class="tab" id="tab-2">
+              <h3 class="thick">Select Start State:</h3>
+
+              <p id="desc-text">q0 is the first state entered into during the computation of your PDA</p>
+ 
+              <select id="select-start-state" name="state-dropdown">
+              </select>
+            </div>
+
+            <!--**********************-->
+            <!-- 3. ADD INPUT SYMBOLS -->
+            <!--**********************-->
+            <div class="tab" id="tab-3">
+              <h3 class="thick">Add Input Symbols:</h3>
+              <p id="desc-text">∑ represents the characters accepted by your PDA, AKA the input symbols.</p>
+
+              <!-- symbol input -->
+              <div class="input-wrapper">
+                <input class="input-keypress-handler" id="symbol-input-field" type="text" placeholder="Ex: 0">
+                <div class="input-buttons">
+                  <a href="#" class="add-input-symbol"><i class="fa fa-plus fa-2x"></i></a>
+                </div>
+              </div>
+              
+              <!-- input symbol list -->
+              <ul class="list" id="input-symbol-list">
+                <li class="item">ε</li>
+              </ul>
+    
+              <!-- error wrapper -->          
+              <div class="row">
+                <div class="error" id="symbol-input-error">
+                  <a href="#"><i class="fa fa-times"></i></a>
+                  <p>Please enter a state</p>
+                </div>
+              </div>
+            </div>
+            
+            <!--**********************-->
+            <!-- 4. ADD STACK SYMBOLS -->
+            <!--**********************-->
+            <div class="tab" id="tab-4">
+              <h3 class="thick">Add Stack Symbols:</h3>
+              <p id="desc-text">Γ represents the symbols which may be read/written to/from your stack.</p>
+
+              <!-- symbol input -->
+              <div class="input-wrapper">
+                <input class="input-keypress-handler" id="stack-input-field" type="text" placeholder="Ex: a">
+                <div class="input-buttons">
+                  <a href="#" class="add-stack-symbol"><i class="fa fa-plus fa-2x"></i></a>
+                </div>
+              </div>
+
+              <!-- state list -->
+              <ul class="list" id="stack-symbol-list">
+                <li class="item">ε</li>
+              </ul>
+
+              <!-- error wrapper -->          
+              <div class="row">
+                <div class="error" id="stack-symbol-error">
+                  <a href="#"><i class="fa fa-times"></i></a>
+                  <p>Please enter a state</p>
+                </div>
+              </div>
+
+            </div>
+
+            <!--**********************-->
+            <!-- 5. STACK START SYMBOL -->
+            <!--**********************-->
+            <div class="tab" id="tab-5">
+              <h3 class="thick">Select Starting Stack Symbol:</h3>
+              <p id="desc-text">Z represents the symbol in your stack that lets your automata know when your stack is empty.</p>
+              <select id="select-stack-symbol" name="stack-dropdown">
+              </select>
+            </div>
+            
+            <!--**********************-->
+            <!-- 6. ADD TRANSITIONS -->
+            <!--**********************-->
+            <div class="tab" id="tab-6">
+              <h3 class="thick">Add Transitions:</h3>
+              <p id="desc-text">Your transition table lets your PDA where it should go next.</p>
+              
+              <div id="transition-box">
+                
+                  <select class="xxx" id="trans-state-dropdown-1"> </select>
+
+                  <p id="xxxs">,</p>  <!-- comma -->
+
+                  <select class="xxx" id="trans-input-dropdown"> </select>
+
+                  <p id="xxxs">,</p> <!-- comma -->
+
+                  <select class="xxx" id="trans-stack-dropdown"> </select>
+
+                  <select class="xxx" id="trans-state-dropdown-2"> </select>
+                  
+                  <p id="xxxs">,</p> <!-- comma -->
+                  
+                  <select class="xxx" id="trans-input-stack-dropdown"> </select>
+                
+                <!-- <div id="transition-box-left">
+                  <select id="xxx" name="xxx">
+                  </select>
+                  <p id="xxxs">,</p>
+                  <select id="xxx" name="xxx">
+                  </select>
+                  <p id="xxxs">,</p>
+                  <select id="xxx" name="xxx">
+                  </select>
+                </div>
+
+                <div id="transition-box-middle">
+                  <p id="xxxs">=</p>
+                </div>
+                               
+                <div id="transition-box-right">
+                  <select id="xxx" name="xxx">
+                  </select>
+                  <p id="xxxs">,</p>
+                  <select id="xxx" name="xxx">
+                  </select>
+                </div> -->
+
+                <div class="input-buttons">
+                  <a href="#" class="add-transition"><i class="fa fa-plus fa-2x"></i></a>
+                </div>
+
+              </div>
+
+              <!-- transition list -->
+              <ul class="list" id="transition-list">
+              </ul>
+
+              <!-- error wrapper -->          
+              <div class="row">
+                <div class="error" id="stack-symbol-error">
+                  <a href="#"><i class="fa fa-times"></i></a>
+                  <p>Please enter a state</p>
+                </div>
+              </div>
+              
+            </div>
+
+            <!--**********************-->
+            <!-- 7. CONFIRM DETAILS   -->
+            <!--**********************-->
+            <div class="tab" id="tab-7">
+              <h3 class="thick">Your PDA:</h3>
+              <p id="desc-text">You have defined the following PDA, press generate PDA to begin using it.</p>
+            </div>
+
+            <!--**********************-->
+            <!-- FORM CONTROLS -->
+            <!--**********************-->
+            <div style="overflow:auto;">
+              <div style="float:right;">
+                <button type="button" id="prevBtn">Previous</button>
+                <button type="button" id="nextBtn">Next</button>
+              </div>
+            </div>
+
+            <!-- Step indicator boxes: -->
+            <div style="align-self: end; text-align:left; margin-top:40px;">
+              <div class="step"></div> <!-- [0], 1: States-->
+              <div class="step"></div> <!-- [1], 2: Input symbols -->
+              <div class="step"></div> <!-- [2], 3: Stack symbols -->
+              <div class="step"></div> <!-- [3], 4: Start state   -->
+              <div class="step"></div> <!-- [4], 5: Stack start symbol -->
+              <div class="step"></div> <!-- [5], 6: Transition table -->
+              <div class="step"></div> <!-- [6], 7: Review Details -->
+            </div>
+
+          </div>
+
+          <!--**********************-->
+          <!-- FORM SUBMIT BUTTON   -->
+          <!--**********************-->
+          <div style="align-self: end; display: contents;">
+            <button id="gradient-button">GENERATE PDA</button>
+          </div>
+
+          <div class="ex-button-wrapper">
+            <div id="left-exBtn-group">
+              <p id="exBtn-label">LOAD EXAMPLE</p>
+            </div>
+            <div id="right-exBtn-group">
+              <button id="exBtn">EX1</button>
+              <button id="exBtn">EX2</button>
+              <button id="exBtn">EX3</button>  
+            </div>
+          </div>
+
+        </div> <!-- end lhs editor -->
+
+        <!-- ************************************************************** -->
+        <!-- RHS -->
+        <!-- ************************************************************** -->        
+        <div class=rhs>
+          
+          <!--**********************-->
+          <!-- GRAPH DISPLAY -->
+          <!--**********************-->
+          <div class="editor-1" id="app">
+            <div id="cy">
+            </div>
+          </div>
+          
+          <!--**********************-->
+          <!-- DIV for TEST INPUT -->
+          <!--**********************-->          
+          <div class="logger-input">
+            <div class="run-step-wrapper">
+              <input id="test-string-input" placeholder="0101011101">
+              <button id="run-step-btn">Step ␣</button>
+              <button id="run-step-btn">Run</button>
+            </div>
+          </div>
+
+          <!--**********************-->
+          <!-- ITERATION LOGGER: LHS -->
+          <!--**********************-->
+          <div class="logger">
+
+            <div class="logger-lhs">
+
+              <h5 id="current-next-state-label">current iteration</h5>
+
+              <div class="current-state-info">
+                <h5 id="current-state-info-label">State</h5>
+                <h5 id="current-state-info-value">q1</h5>
+              </div>
+
+              <div class="current-state-info">
+                <h5 id="current-state-info-label">Is Accept</h5>
+                <h5 id="current-state-info-value">No</h5>
+              </div>
+
+              <div class="current-state-info">
+                <h5 id="current-state-info-label">Tape head</h5>
+                <h5 id="current-state-info-value">Z</h5>
+              </div>
+
+              <div class="current-state-info">
+                <h5 id="current-state-info-label">Input Character</h5>
+                <h5 id="current-state-info-value">Z</h5>
+              </div>
+
+              <div class="current-state-info">
+                <h5 id="current-state-info-label">Rule Found</h5>
+                <h5 id="current-state-info-value">Yes</h5>
+              </div>
+
+              <div class="current-state-info">
+                <h5 id="current-state-info-label">Rule Found</h5>
+                <h5 id="current-state-info-value">Yes</h5>
+              </div>
+
+            </div>
+
+            <!--**********************-->
+            <!-- ITERATION LOGGER: RHS -->
+            <!--**********************-->
+            <div class="logger-rhs">
+            </div>
+
+          </div>
+        </div>
+      </div>
+    
+    <!-- GRAPH GENERATOR DEPENDENCIES -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.1.4/cytoscape.min.js'></script>
+    <script src='https://cdn.rawgit.com/cytoscape/cytoscape.js-cose-bilkent/1.6.5/cytoscape-cose-bilkent.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react-dom.min.js'></script>
+    <!-- GRAPH GENERATOR DEPENDENCIES -->
+
+    <!-- IMPORT JQUERY -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+    <!-- IMPORT LOCAL JS -->
+    <script type="module" src="javascripts/script.js"></script>
+
+  </body>
+</html>

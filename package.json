@@ -1,0 +1,59 @@
+{
+  "name": "pda",
+  "version": "0.0.0",
+  "private": true,
+  "nodemonConfig": {
+    "exec": "npm run dev",
+    "watch": [
+      "server/*",
+      "public/*"
+    ],
+    "ignore": [
+      "**/__tests__/**",
+      "*.test.js",
+      "*.spec.js"
+    ]
+  },
+  "scripts": {
+    "test": "node ./public/javascripts/PDA/main.js",
+    "oldstart": "node ./server/bin/www",
+    "start": "npm run prod",
+    "build": "npm-run-all clean transpile",
+    "server": "node ./dist-server/bin/www",
+    "dev": "NODE_ENV=development npm-run-all build server",
+    "prod": "NODE_ENV=production npm-run-all build server",
+    "transpile": "babel ./server --out-dir dist-server",
+    "clean": "rimraf dist-server",
+    "watch:dev": "nodemon"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.14.3",
+    "@babel/core": "^7.14.3",
+    "@babel/preset-env": "^7.14.2",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "body-parser": "^1.19.0",
+    "chroma-js": "^2.1.2",
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "cytoscape": "^3.19.0",
+    "cytoscape-cose-bilkent": "^4.1.0",
+    "debug": "~2.6.9",
+    "ejs": "^3.1.6",
+    "express": "^4.16.4",
+    "http-errors": "~1.6.3",
+    "jade": "^0.29.0",
+    "jquery": "^3.6.0",
+    "morgan": "~1.9.1",
+    "nodemon": "^2.0.7",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "sass": "^1.32.13",
+    "save": "^2.4.0"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  }
+}

@@ -1,0 +1,567 @@
+html, body {
+  /* height: 100%;
+  width: 100%; */
+  margin: 0;
+  background: white;
+  color: #455a64;
+  /* font-family: Monaco, monospace; */
+  font-weight: 300;
+}
+
+body{
+  font-family: "Monaco", monospace; 
+}
+
+/* Text styles */
+h1 {
+  font-size: 36px;
+  /* font-family: Monaco, monospace; */
+  font-weight: 900;
+  margin-bottom: 50px;
+  text-align: left;
+  background: -webkit-linear-gradient(135deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+h2 {
+  font-size: 20px;
+  /* font-family: Monaco, monospace; */
+  margin: 10px 0;
+  text-align: left;
+}
+
+h3 {
+  font-size: 18px;
+  /* font-family: Monaco, monospace; */
+  margin: 10px 0;
+  text-align: left;
+  font-weight: 900;
+}
+
+h3.thick {
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 16px;
+  /* font-family: Monaco, monospace; */
+  margin: 10px 0;
+  text-align: left;
+}
+
+#desc-text{
+  font-size: 12px;
+}
+
+/* Graph GUI Styles */
+#cy {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  flex-grow: 1;
+  background-color: #f6f6f6;
+}
+
+/* ********************** */
+/* Div styles             */
+/* ********************** */
+
+.editor {
+  padding: 50px;
+  background: #f6f6f6;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 35%;
+  overflow-y:auto;
+
+  border-right: 1px solid rgba(124, 124, 124, .25);
+  -webkit-background-clip: padding-box; /* for Safari */
+  background-clip: padding-box;
+  min-height: 100%;
+  justify-content: top; 
+  color: #455a64; 
+}
+
+.rhs{
+  display: flex;
+  flex-direction: column;
+  flex-basis: 65%;
+  min-height: 100%;
+}
+
+.logger {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  height: 50vh;
+  border-width: 1px;
+}
+
+.logger-input{
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  background-color: f6f6f6;
+
+  border-bottom: 1px solid rgba(124, 124, 124, .5);
+  border-top: 1px solid rgba(124, 124, 124, .5);
+  -webkit-background-clip: padding-box; /* for Safari */
+  background-clip: padding-box;
+}
+#test-string-input{
+  width: 100%;
+  height: 100%;
+  background: #f6f6f6;
+  color: black;
+  border-bottom: none;
+  padding: 10px;
+}
+
+.current-state-info{
+  display: flex;
+  justify-content: space-between;
+  margin: 0px;
+  padding: 0px; 
+}
+#current-state-info-label{
+  align-self: start;
+  line-height: 10px;
+}
+#current-state-info-value{
+  align-self: end;
+  line-height: 10px;
+}
+#current-next-state-label{
+  background: -webkit-linear-gradient(135deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  font-weight: 900;
+}
+
+.editor-1 {
+  display: flex;
+  flex-direction: row;
+  flex-basis: 100%;
+  flex-grow: 1;
+}
+
+.logger-lhs{
+  width: 30%;
+  height: 100%;
+  padding: 20px;
+  background: #f2f2f2;
+  display: column;
+}
+
+.logger-rhs{
+  width: 70%;
+  min-height: 100%;
+  padding: 20px;
+  background: #f2f2f2;
+  display: column;
+  overflow-y:auto;
+  border-left-style: solid;
+  border-color: white;
+  border-width: 1px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  height: 100vh;
+  width: 100vw;
+  padding: 0;
+}
+
+/* ********************** */
+/* Input field styles     */
+/* ********************** */
+
+input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #455a64;
+  font-size: 16px;
+  /* font-family: Monaco, monospace; */
+  height: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+input:focus {
+  outline: 0;
+}
+.input-buttons {
+  height: 50px;
+  width: 25%;
+  border-bottom: 1px solid #455a64;
+  display: grid;
+  align-items: center;
+}
+.input-buttons i {
+  padding: 0 12px;
+  color: #455a64;
+  float: right;
+}
+@media (width: 7.5px) {
+  .input-buttons .fa-trash-o:hover {
+    color: #ff5252;
+  }
+  .input-buttons .fa-plus:hover {
+    color: #69f0ae;
+  }
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+/* error message styling */
+.error {
+  color: #ff5252;
+  display: none;
+  font-size: 12px;
+  /* font-family: Monaco, monospace; */
+  margin-top: 10px;
+  text-align: right;
+}
+.error .fa-times {
+  color: #ff5252;
+  padding: 5px 10px;
+  float: right;
+}
+.error .fa-times:hover {
+  color: #ff5252;
+  opacity: 80%;
+}
+.error p {
+  margin: 10px 0;
+}
+@media (min-width: 600px) {
+  .error p {
+    font-size: 14px;
+  }
+}
+
+/* todo list styling */
+.list {
+  padding: 0px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  /* margin: 5px 0px 5px; */
+}
+
+.list .item {
+  background: #eceff1;
+  border-bottom: 1px dotted rgba(124, 124, 124, .20);
+  color: #455a64;
+  font-size: 14px;
+  list-style: none;
+  padding-left: 10px;
+  padding-right: 70px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  white-space: normal;
+  height: 35px;
+  
+}
+
+.transition-list-item{
+  display: flex;
+}
+
+span {
+  position: absolute;
+  right: 0;
+}
+span a {
+  color: #455a64;
+}
+span i {
+  padding: 5px 15px;
+}
+span .fa-check {
+  border-right: 1px solid rgba(124, 124, 124, .20);
+}
+span .fa-check:hover {
+  color: #69f0ae;
+}
+span .fa-trash-o:hover {
+  color: #ff5252;
+}
+.complete {
+  color: #69f0ae;
+}
+.complete .check {
+  color: #69f0ae;
+}
+
+/* -0---------------- */
+
+input.invalid {
+  background-color: #ffdddd;
+}
+
+/* ********************** */
+/* Select start state     */
+/* ********************** */
+#select-start-state{
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #455a64;
+  font-size: 16px;
+  /* font-family: Monaco, monospace; */
+  height: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+#select-stack-symbol{
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #455a64;
+  font-size: 16px;
+  /* font-family: Monaco, monospace; */
+  height: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+#transition-box{
+  display: flex;
+  flex-direction: row;
+}
+#xxxs{
+  margin: 3px;
+  font-size: 20px;
+  font-weight:lighter;
+  align-self: flex-end;
+}
+
+#transition-box-left{
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  padding: 5px;
+  border: 1px solid rgba(124, 124, 124, .20);
+  align-items: flex-end;
+}
+#transition-box-right{
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  padding: 5px;
+  border: 1px solid rgba(124, 124, 124, .20);
+  align-items: flex-end;
+}
+#transition-box-middle{
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+  border-top: 1px solid rgba(124, 124, 124, .20);
+  border-bottom: 1px solid rgba(124, 124, 124, .20);
+}
+
+.xxx{
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #455a64;
+  font-size: 16px;
+  /* font-family: Monaco, monospace; */
+  height: 50px;
+  display: inline;
+  flex-grow: 1;
+  flex-direction: row;
+  margin-right: 3px;
+  /* margin: 3px; */
+}
+
+/* #xxx{
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #455a64;
+  font-size: 14px;
+  /* font-family: Monaco, monospace; */
+  /* height: 20px;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: row; */
+  /* margin: 3px; */
+
+#addBtn{
+  height: 50px;
+  width: 50px;
+  border: 1px solid rgba(124, 124, 124, .20);
+  /* border-top: 1px solid rgba(124, 124, 124, .20);
+  border-bottom: 1px solid rgba(124, 124, 124, .20);
+  border-right: 1px solid rgba(124, 124, 124, .20); */
+}
+
+/* ********************** */
+/* Button CSS             */
+/* ********************** */
+
+button{
+  /* font-family: Monaco, monospace; */
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 12px;
+  border: none;
+  transition: opacity ease-out 0.3s;
+  cursor: pointer;
+}
+button:hover{
+    opacity: 0.8;
+}
+
+#run-step-btn{
+  background: #f6f6f6; 
+  color: black;
+  padding: 2rem;
+
+  border-left: 1px solid rgba(124, 124, 124, .25);
+  -webkit-background-clip: padding-box; /* for Safari */
+  background-clip: padding-box;
+
+  /* border-left-style: solid;
+  border-color: gray;
+  border-width: 1px; */
+}
+
+.run-step-wrapper{
+  display: inline-flex;
+  width: 100%;
+}
+
+.ex-button-wrapper{
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  /* border-color: white;
+  border-width: 1px; */
+
+  border: 1px solid rgba(124, 124, 124, .5);
+  -webkit-background-clip: padding-box; /* for Safari */
+  background-clip: padding-box;
+}
+#exBtn-label{
+  background: transparent; 
+  padding: 1rem;
+  font-weight: 900;
+  font-size: 12px;
+  margin: 0px;
+
+  background: -webkit-linear-gradient(135deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#exBtn{
+  background: transparent; 
+  padding: 1rem;
+  font-weight: 900;
+  font-size: 12px;
+
+  border-left: 1px solid rgba(124, 124, 124, .5);
+  -webkit-background-clip: padding-box; /* for Safari */
+  background-clip: padding-box;
+
+  background: -webkit-linear-gradient(135deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#left-exBtn-group{
+  display: row;
+  flex-direction: column;
+  align-self: start;
+}
+#right-exBtn-group{
+  display: flex;
+  flex-direction: row;
+  align-self: end;
+}
+
+#prevBtn {
+  padding: 1rem;
+  background: gray;
+  color: white;
+}
+#nextBtn {
+  padding: 1rem;
+  background: black;
+  color: white;
+}
+
+#gradient-button {
+  -webkit-appearance: none;
+  padding: 2rem;
+  background: blue;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 12px;
+  border: none;
+  background-color: #FF3CAC;
+  background-image: linear-gradient(135deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+  transition: opacity ease-out 0.3s;
+  /* cursor: pointer; */
+  width: 100%;  
+}
+#gradient-button:hover{
+    opacity: 0.8;
+}
+#gradient-button:disabled{
+  opacity: 0.25;
+}
+
+/* ************************************************************** */
+/* multistep tab styling */
+/* ************************************************************** */
+
+/* Mark input boxes that gets an error on validation: */
+#regForm{
+  margin-top: 40px;
+  /* align-items: stretch; */
+  /* display: flex; */
+  height: 100%;
+  display: grid;
+}
+
+/* Hide all steps by default: */
+.tab {
+  display: none;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: black;
+  border: none;
+  border-radius: 0%;
+  display: inline-block;
+  opacity: 0.5;
+  align: left;
+}
+
+/* Mark the active step: */
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  -webkit-appearance: none;
+  /* background-color: #04AA6D; */
+  background-color: #FF3CAC;
+  background-image: linear-gradient(135deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+}
